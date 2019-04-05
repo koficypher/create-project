@@ -39,8 +39,9 @@ export async function createProject(options) {
 
  //setting the currenting url for locating the template files
  const currentFileUrl = import.meta.url;
+ const currentURL = new URL(currentFileUrl);
  const templateDir = path.resolve(
-   new URL(currentFileUrl).pathname,
+   currentURL.pathname,
    '../../templates',
    options.template.toLowerCase()
  );
@@ -48,7 +49,7 @@ export async function createProject(options) {
 
  //checking to see if file exist and can be read
  try {
-     console.log(new URL(currentFileUrl).pathname);
+    // console.log(new URL(currentFileUrl).pathname);
    await access(templateDir.slice(3), fs.constants.R_OK);
  } catch (err) {
    console.log(err);

@@ -57,12 +57,22 @@ async function promptForMissingOptions(options) {
       });
     }
    
+    // if (!options.runInstall) {
+    //   questions.push({
+    //      type: 'confirm',
+    //      name: 'install',
+    //      message: 'Install dependencies?',
+    //      default: false
+    //   });
+    // }
+
     //wait for answers and parse them appropriately, defaults as well
     const answers = await inquirer.prompt(questions);
     return {
       ...options,
       template: options.template || answers.template,
       git: options.git || answers.git,
+      // runInstall: options.runInstall || answers.install,
     };
    }
 

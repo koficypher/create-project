@@ -5,6 +5,7 @@ import path from 'path';
 import { promisify } from 'util';
 import execa from 'execa';
 import Listr from 'listr';
+import  {URL}  from 'url';
 import { projectInstall } from 'pkg-install';
 
 //making fs and ncp return promises for easier consumption
@@ -47,7 +48,7 @@ export async function createProject(options) {
 
  //checking to see if file exist and can be read
  try {
-    // console.log(new URL(currentFileUrl).pathname.slice(3));
+     console.log(new URL(currentFileUrl).pathname);
    await access(templateDir.slice(3), fs.constants.R_OK);
  } catch (err) {
    console.log(err);
@@ -67,7 +68,7 @@ export async function createProject(options) {
       enabled: () => options.git,
     },
     {
-      title: 'Install dependencies',
+      title: 'Installing dependencies',
       task: () =>
         projectInstall({
           cwd: options.targetDirectory,
